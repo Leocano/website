@@ -1,5 +1,15 @@
+import { MainContainer } from "./components/MainContainer";
+import { Title } from "./components/Title";
+
 function App() {
-  return <div>Hello!</div>;
+  return (
+    <MainContainer>
+      <Title>
+        Hey there! I'm Leo,
+        <br />a software engineer
+      </Title>
+    </MainContainer>
+  );
 }
 
 export default App;
