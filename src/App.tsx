@@ -1,35 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { ExternalLink } from "./components/ExternalLink";
+import { MainContainer } from "./components/MainContainer";
+import { Subtitle } from "./components/Subtitle";
+import { Title } from "./components/Title";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <MainContainer>
+      <Title>
+        Hey! I'm Leo,
+        <br />a software engineer
+      </Title>
+      <Subtitle>
+        This website is under construction, but you can check my{" "}
+        <ExternalLink to="https://www.linkedin.com/in/leonardo-cano/">
+          Linkedin profile
+        </ExternalLink>{" "}
+        if you're curious :D
+      </Subtitle>
+    </MainContainer>
+  );
 }
 
-export default App
+export default App;
