@@ -5,5 +5,7 @@ type MainContainerProps = {
 };
 
 export function MainContainer({ children }: MainContainerProps) {
-  return <div className="h-dvh w-full bg-indigo-950 pt-24">{children}</div>;
+  return (
+    <div className="h-dvh w-full bg-indigo-950 px-10 pt-32">{children}</div>
+  );
 }

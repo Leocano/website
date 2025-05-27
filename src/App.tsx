@@ -5,7 +5,7 @@ function App() {
   return (
     <MainContainer>
       <Title>
-        Hey there! I'm Leo,
+        Hey! I'm Leo,
         <br />a software engineer
       </Title>
     </MainContainer>
