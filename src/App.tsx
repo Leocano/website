@@ -12,8 +12,9 @@ function App() {
       </Title>
       <Subtitle>
         This website is under construction, but you can check my{" "}
+        <ExternalLink to="https://github.com/Leocano">Github</ExternalLink> and{" "}
         <ExternalLink to="https://www.linkedin.com/in/leonardo-cano/">
-          Linkedin profile
+          Linkedin
         </ExternalLink>{" "}
         if you're curious :D
       </Subtitle>
