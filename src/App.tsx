@@ -1,3 +1,4 @@
+import { ExternalLink } from "./components/ExternalLink";
 import { MainContainer } from "./components/MainContainer";
 import { Subtitle } from "./components/Subtitle";
 import { Title } from "./components/Title";
@@ -10,8 +11,11 @@ function App() {
         <br />a software engineer
       </Title>
       <Subtitle>
-        This website is under construction, but you can check my Linkedin
-        profile if you're curious :)
+        This website is under construction, but you can check my{" "}
+        <ExternalLink to="https://www.linkedin.com/in/leonardo-cano/">
+          Linkedin profile
+        </ExternalLink>{" "}
+        if you're curious :D
       </Subtitle>
     </MainContainer>
   );
