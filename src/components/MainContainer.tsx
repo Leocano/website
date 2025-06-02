@@ -6,7 +6,7 @@ type MainContainerProps = {
 
 export function MainContainer({ children }: MainContainerProps) {
   return (
-    <div className="h-dvh w-full bg-gradient-to-bl from-indigo-900 to-violet-800 px-4 pt-32">
+    <div className="h-dvh w-full bg-gradient-to-r from-slate-900 to-sky-950 px-4 pt-32">
       {children}
     </div>
   );
