@@ -2,6 +2,7 @@ import { ExternalLink } from "./components/ExternalLink";
 import { MainContainer } from "./components/MainContainer";
 import { Subtitle } from "./components/Subtitle";
 import { Title } from "./components/Title";
+import { EditorDoodle } from "./components/EditorDoodle";
 
 export const App = () => {
   return (
@@ -18,6 +19,7 @@ export const App = () => {
         </ExternalLink>{" "}
         if you're curious :D
       </Subtitle>
+      <EditorDoodle />
     </MainContainer>
   );
 };
