@@ -3,7 +3,7 @@ import { MainContainer } from "./components/MainContainer";
 import { Subtitle } from "./components/Subtitle";
 import { Title } from "./components/Title";
 
-function App() {
+export const App = () => {
   return (
     <MainContainer>
       <Title>
@@ -20,6 +20,6 @@ function App() {
       </Subtitle>
     </MainContainer>
   );
-}
+};
 
 export default App;

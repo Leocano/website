@@ -5,7 +5,7 @@ type ExternalLinkProps = {
   to: string;
 };
 
-export function ExternalLink({ children, to }: ExternalLinkProps) {
+export const ExternalLink = ({ children, to }: ExternalLinkProps) => {
   return (
     <a
       className="text-amber-500 underline hover:text-amber-400 hover:no-underline"
@@ -16,4 +16,4 @@ export function ExternalLink({ children, to }: ExternalLinkProps) {
       {children}
     </a>
   );
-}
+};
