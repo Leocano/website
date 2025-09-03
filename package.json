@@ -15,7 +15,6 @@
     "tailwindcss": "4.1.16",
     "@astrojs/svelte": "^7.1.0",
     "svelte": "^5.38.3",
-    "three": "^0.179.1",
     "typescript": "^5.9.2"
   },
   "devDependencies": {
