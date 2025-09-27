@@ -3,7 +3,7 @@ import {
   toggleFlag as toggleFlagEngine,
   revealCells as revealCellsEngine,
   placeMines,
-} from "./engine";
+} from "../engine";
 
 let boardState = $state(createEmptyBoard());
 let initialized = $state(false);
