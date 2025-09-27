@@ -9,14 +9,21 @@ export function placeMines(
 ): Board {
   let placed = 0;
   while (placed < MINE_AMOUNT) {
-    const row = Math.floor(Math.random() * BOARD_SIZE.ROWS);
-    const col = Math.floor(Math.random() * BOARD_SIZE.COLS);
+    const rowToPlace = Math.floor(Math.random() * BOARD_SIZE.ROWS);
+    const colToPlace = Math.floor(Math.random() * BOARD_SIZE.COLS);
 
-    if (row === safeRow && col === safeCol) {
+    if (
+      (rowToPlace === safeRow + 1 ||
+        rowToPlace === safeRow - 1 ||
+        rowToPlace === safeRow) &&
+      (colToPlace === safeCol + 1 ||
+        colToPlace === safeCol - 1 ||
+        colToPlace === safeCol)
+    ) {
       continue;
     }
 
-    const cell = board[row][col];
+    const cell = board[rowToPlace][colToPlace];
 
     if (cell.content === "mine") {
       continue;
@@ -26,8 +33,8 @@ export function placeMines(
     placed++;
 
     for (const [rowOffset, colOffset] of DIRECTIONS) {
-      const newRow = row + rowOffset;
-      const newCol = col + colOffset;
+      const newRow = rowToPlace + rowOffset;
+      const newCol = colToPlace + colOffset;
       if (!isOutOfBounds(newRow, newCol)) {
         board[newRow][newCol].bombsAround++;
       }
