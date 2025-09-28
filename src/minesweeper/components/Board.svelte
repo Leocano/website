@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { store } from "../board/boardStore.svelte";
+  import { store } from "../store.svelte";
   import Cell from "./Cell.svelte";
 </script>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Cell } from "../types";
-  import { toggleFlag, revealCells } from "../board/boardStore.svelte";
+  import { store } from "../store.svelte";
 
   type Props = Cell & {
     row: number;
@@ -13,17 +13,17 @@
     }
 
     if (content === "mine") {
-      revealCells(row, col);
+      store.revealCells(row, col);
       // lose
       return;
     }
 
-    revealCells(row, col);
+    store.revealCells(row, col);
   }
 
   function handleContextMenu(e: Event) {
     e.preventDefault();
-    toggleFlag(row, col);
+    store.toggleFlag(row, col);
   }
 
   const { content, status, row, col, bombsAround }: Props = $props();
