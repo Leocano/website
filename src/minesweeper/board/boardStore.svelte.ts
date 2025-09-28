@@ -1,8 +1,8 @@
-import { createEmptyBoard } from "./boardSetup";
 import {
   toggleFlag as toggleFlagEngine,
   revealCells as revealCellsEngine,
   placeMines,
+  createEmptyBoard,
 } from "../engine";
 
 let boardState = $state(createEmptyBoard());
