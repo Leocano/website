@@ -1,6 +1,6 @@
 import type { Board } from "../types";
 import { BOARD_SIZE, DIRECTIONS, MINE_AMOUNT } from "../constants";
-import { isOutOfBounds } from "../board/utils";
+import { isOutOfBounds } from "./isOutOfBounds";
 
 export function placeMines(
   board: Board,
