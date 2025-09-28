@@ -5,26 +5,24 @@ import {
   createEmptyBoard,
 } from "../engine";
 
-let boardState = $state(createEmptyBoard());
-let initialized = $state(false);
-
-export function getBoardState() {
-  return boardState;
-}
+export const store = $state({
+  board: createEmptyBoard(),
+  initialized: false,
+});
 
 export function restartGame() {
-  boardState = createEmptyBoard();
+  store.board = createEmptyBoard();
 }
 
 export function toggleFlag(row: number, col: number) {
-  boardState = toggleFlagEngine(boardState, row, col);
+  store.board = toggleFlagEngine($state.snapshot(store.board), row, col);
 }
 
 export function revealCells(row: number, col: number) {
-  if (!initialized) {
-    boardState = placeMines(boardState, row, col);
-    initialized = true;
+  if (!store.initialized) {
+    store.board = placeMines($state.snapshot(store.board), row, col);
+    store.initialized = true;
   }
 
-  boardState = revealCellsEngine(boardState, row, col);
+  store.board = revealCellsEngine($state.snapshot(store.board), row, col);
 }
