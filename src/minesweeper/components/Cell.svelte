@@ -15,6 +15,7 @@
 
     if (content === "mine") {
       store.revealCells(row, col);
+      alert("you lose");
       store.restartGame();
       return;
     }

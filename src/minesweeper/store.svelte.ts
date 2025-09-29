@@ -1,3 +1,4 @@
+import { MINE_AMOUNT } from "./constants";
 import {
   toggleFlag,
   revealCells,
@@ -8,8 +9,19 @@ import type { Board } from "./types";
 
 class Store {
   board: Board = $state(createEmptyBoard());
-  status: "uninitialized" | "playing" | "win" | "loss" =
-    $state("uninitialized");
+
+  status: "uninitialized" | "playing" | "win" = $derived.by(() => {
+    if (this.flaggedMines === MINE_AMOUNT) {
+      return "win";
+    }
+
+    if (this.board.flat().some((cell) => cell.status === "clicked")) {
+      return "playing";
+    }
+
+    return "uninitialized";
+  });
+
   flaggedMines: number = $derived(
     this.board
       .flat()
@@ -18,7 +30,6 @@ class Store {
   );
 
   restartGame() {
-    this.status = "uninitialized";
     this.board = createEmptyBoard();
   }
 
@@ -29,7 +40,6 @@ class Store {
   revealCells(row: number, col: number) {
     if (this.status === "uninitialized") {
       this.board = placeMines($state.snapshot(this.board), row, col);
-      this.status = "playing";
     }
 
     this.board = revealCells($state.snapshot(this.board), row, col);
