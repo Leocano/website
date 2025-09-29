@@ -8,9 +8,11 @@ import type { Board } from "./types";
 
 class Store {
   board: Board = $state(createEmptyBoard());
-  initialized: boolean = $state(false);
+  status: "uninitialized" | "playing" | "win" | "loss" =
+    $state("uninitialized");
 
   restartGame() {
+    this.status = "uninitialized";
     this.board = createEmptyBoard();
   }
 
@@ -19,12 +21,17 @@ class Store {
   }
 
   revealCells(row: number, col: number) {
-    if (!this.initialized) {
+    if (this.status === "uninitialized") {
       this.board = placeMines($state.snapshot(this.board), row, col);
-      this.initialized = true;
+      this.status = "playing";
     }
 
     this.board = revealCells($state.snapshot(this.board), row, col);
+  }
+
+  lose() {
+    alert("You lose!");
+    this.restartGame();
   }
 }
 

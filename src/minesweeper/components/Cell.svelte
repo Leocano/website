@@ -14,7 +14,7 @@
 
     if (content === "mine") {
       store.revealCells(row, col);
-      // lose
+      store.lose();
       return;
     }
 
