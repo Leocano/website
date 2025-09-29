@@ -1,6 +1,6 @@
 import {
-  toggleFlag as toggleFlagEngine,
-  revealCells as revealCellsEngine,
+  toggleFlag,
+  revealCells,
   placeMines,
   createEmptyBoard,
 } from "./engine";
@@ -11,20 +11,20 @@ class Store {
   initialized: boolean = $state(false);
 
   restartGame() {
-    store.board = createEmptyBoard();
+    this.board = createEmptyBoard();
   }
 
   toggleFlag(row: number, col: number) {
-    store.board = toggleFlagEngine($state.snapshot(store.board), row, col);
+    this.board = toggleFlag($state.snapshot(this.board), row, col);
   }
 
   revealCells(row: number, col: number) {
-    if (!store.initialized) {
-      store.board = placeMines($state.snapshot(store.board), row, col);
-      store.initialized = true;
+    if (!this.initialized) {
+      this.board = placeMines($state.snapshot(this.board), row, col);
+      this.initialized = true;
     }
 
-    store.board = revealCellsEngine($state.snapshot(store.board), row, col);
+    this.board = revealCells($state.snapshot(this.board), row, col);
   }
 }
 
