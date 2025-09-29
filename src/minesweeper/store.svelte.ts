@@ -10,6 +10,12 @@ class Store {
   board: Board = $state(createEmptyBoard());
   status: "uninitialized" | "playing" | "win" | "loss" =
     $state("uninitialized");
+  flaggedMines: number = $derived(
+    this.board
+      .flat()
+      .filter((cell) => cell.status === "flagged" && cell.content === "mine")
+      .length,
+  );
 
   restartGame() {
     this.status = "uninitialized";
@@ -27,11 +33,6 @@ class Store {
     }
 
     this.board = revealCells($state.snapshot(this.board), row, col);
-  }
-
-  lose() {
-    alert("You lose!");
-    this.restartGame();
   }
 }
 

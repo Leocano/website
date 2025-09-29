@@ -6,6 +6,7 @@
     row: number;
     col: number;
   };
+  const { content, status, row, col, bombsAround }: Props = $props();
 
   function handleCellClick() {
     if (status === "flagged") {
@@ -14,7 +15,7 @@
 
     if (content === "mine") {
       store.revealCells(row, col);
-      store.lose();
+      store.restartGame();
       return;
     }
 
@@ -25,8 +26,6 @@
     e.preventDefault();
     store.toggleFlag(row, col);
   }
-
-  const { content, status, row, col, bombsAround }: Props = $props();
 </script>
 
 <button
