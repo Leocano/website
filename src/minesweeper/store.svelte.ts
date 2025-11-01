@@ -10,7 +10,15 @@ import type { Board } from "./types";
 class Store {
   board: Board = $state(createEmptyBoard());
 
-  status: "uninitialized" | "playing" | "win" = $derived.by(() => {
+  status: "initial" | "playing" | "win" | "loss" = $derived.by(() => {
+    if (
+      this.board
+        .flat()
+        .some((cell) => cell.status === "clicked" && cell.content === "mine")
+    ) {
+      return "loss";
+    }
+
     if (this.flaggedMines === MINE_AMOUNT) {
       return "win";
     }
@@ -19,7 +27,7 @@ class Store {
       return "playing";
     }
 
-    return "uninitialized";
+    return "initial";
   });
 
   flaggedMines: number = $derived(
@@ -38,7 +46,7 @@ class Store {
   }
 
   revealCells(row: number, col: number) {
-    if (this.status === "uninitialized") {
+    if (this.status === "initial") {
       this.board = placeMines($state.snapshot(this.board), row, col);
     }
 

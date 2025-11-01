@@ -6,17 +6,11 @@
     row: number;
     col: number;
   };
+
   const { content, status, row, col, bombsAround }: Props = $props();
 
   function handleCellClick() {
     if (status === "flagged") {
-      return;
-    }
-
-    if (content === "mine") {
-      store.revealCells(row, col);
-      alert("you lose");
-      store.restartGame();
       return;
     }
 
