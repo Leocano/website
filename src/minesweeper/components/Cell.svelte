@@ -10,7 +10,7 @@
   const { content, status, row, col, bombsAround }: Props = $props();
 
   function handleCellClick() {
-    if (status === "flagged") {
+    if (status === "flagged" || store.status === "loss") {
       return;
     }
 
