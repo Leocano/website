@@ -19,6 +19,11 @@
 
   function handleContextMenu(e: Event) {
     e.preventDefault();
+
+    if (store.status !== "playing") {
+      return;
+    }
+
     store.toggleFlag(row, col);
   }
 </script>

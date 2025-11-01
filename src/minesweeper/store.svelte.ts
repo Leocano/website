@@ -19,7 +19,10 @@ class Store {
       return "loss";
     }
 
-    if (this.flaggedMines === MINE_AMOUNT) {
+    if (
+      this.flaggedMines === MINE_AMOUNT &&
+      this.flaggedCells === MINE_AMOUNT
+    ) {
       return "win";
     }
 
@@ -29,6 +32,10 @@ class Store {
 
     return "initial";
   });
+
+  flaggedCells: number = $derived(
+    this.board.flat().filter((cell) => cell.status === "flagged").length,
+  );
 
   flaggedMines: number = $derived(
     this.board
