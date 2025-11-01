@@ -4,41 +4,16 @@ import {
   revealCells as revealCellsEngine,
   placeMines,
   createEmptyBoard,
+  getGameStatus,
+  getFlaggedCells,
 } from "./engine";
 import type { Board } from "./types";
 
 let board: Board = $state(createEmptyBoard());
 
-const flaggedMines: number = $derived(
-  board
-    .flat()
-    .filter((cell) => cell.status === "flagged" && cell.content === "mine")
-    .length,
-);
+const flaggedCells = $derived.by(() => getFlaggedCells($state.snapshot(board)));
 
-const flaggedCells: number = $derived(
-  board.flat().filter((cell) => cell.status === "flagged").length,
-);
-
-const gameStatus: "initial" | "playing" | "win" | "loss" = $derived.by(() => {
-  if (
-    board
-      .flat()
-      .some((cell) => cell.status === "clicked" && cell.content === "mine")
-  ) {
-    return "loss";
-  }
-
-  if (flaggedMines === MINE_AMOUNT && flaggedCells === MINE_AMOUNT) {
-    return "win";
-  }
-
-  if (board.flat().some((cell) => cell.status === "clicked")) {
-    return "playing";
-  }
-
-  return "initial";
-});
+const gameStatus = $derived.by(() => getGameStatus($state.snapshot(board)));
 
 const restartGame = () => {
   board = createEmptyBoard();
@@ -62,9 +37,6 @@ export const store = {
   },
   get flaggedCells() {
     return flaggedCells;
-  },
-  get flaggedMines() {
-    return flaggedMines;
   },
   get gameStatus() {
     return gameStatus;
