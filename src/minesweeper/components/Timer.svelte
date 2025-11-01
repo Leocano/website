@@ -36,17 +36,17 @@
   }
 
   $effect(() => {
-    if (store.status === "playing" && !intervalId) {
+    if (store.gameStatus === "playing" && !intervalId) {
       startTimer();
       return;
     }
 
-    if (store.status === "loss" || store.status === "win") {
+    if (store.gameStatus === "loss" || store.gameStatus === "win") {
       stopTimer();
       return;
     }
 
-    if (store.status === "initial") {
+    if (store.gameStatus === "initial") {
       stopTimer();
       resetTimer();
     }

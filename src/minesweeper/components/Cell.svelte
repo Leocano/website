@@ -10,7 +10,7 @@
   const { content, status, row, col, bombsAround }: Props = $props();
 
   function handleCellClick() {
-    if (status === "flagged" || store.status === "loss") {
+    if (status === "flagged" || store.gameStatus === "loss") {
       return;
     }
 
@@ -20,7 +20,7 @@
   function handleContextMenu(e: Event) {
     e.preventDefault();
 
-    if (store.status !== "playing") {
+    if (store.gameStatus !== "playing") {
       return;
     }
 

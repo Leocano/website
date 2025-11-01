@@ -10,7 +10,7 @@ import type { Board } from "./types";
 class Store {
   board: Board = $state(createEmptyBoard());
 
-  status: "initial" | "playing" | "win" | "loss" = $derived.by(() => {
+  gameStatus: "initial" | "playing" | "win" | "loss" = $derived.by(() => {
     if (
       this.board
         .flat()
@@ -53,7 +53,7 @@ class Store {
   }
 
   revealCells(row: number, col: number) {
-    if (this.status === "initial") {
+    if (this.gameStatus === "initial") {
       this.board = placeMines($state.snapshot(this.board), row, col);
     }
 
