@@ -2,11 +2,11 @@ import type { Board } from "../types";
 import { BOARD_SIZE, DIRECTIONS, MINE_AMOUNT } from "../constants";
 import { isOutOfBounds } from "./isOutOfBounds";
 
-export function placeMines(
+export const placeMines = (
   board: Board,
   safeRow: number,
   safeCol: number,
-): Board {
+): Board => {
   let placed = 0;
   while (placed < MINE_AMOUNT) {
     const rowToPlace = Math.floor(Math.random() * BOARD_SIZE.ROWS);
@@ -42,4 +42,4 @@ export function placeMines(
   }
 
   return board;
-}
+};

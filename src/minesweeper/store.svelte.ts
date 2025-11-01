@@ -1,64 +1,75 @@
 import { MINE_AMOUNT } from "./constants";
 import {
-  toggleFlag,
-  revealCells,
+  toggleFlag as toggleFlagEngine,
+  revealCells as revealCellsEngine,
   placeMines,
   createEmptyBoard,
 } from "./engine";
 import type { Board } from "./types";
 
-class Store {
-  board: Board = $state(createEmptyBoard());
+let board: Board = $state(createEmptyBoard());
 
-  gameStatus: "initial" | "playing" | "win" | "loss" = $derived.by(() => {
-    if (
-      this.board
-        .flat()
-        .some((cell) => cell.status === "clicked" && cell.content === "mine")
-    ) {
-      return "loss";
-    }
+const flaggedMines: number = $derived(
+  board
+    .flat()
+    .filter((cell) => cell.status === "flagged" && cell.content === "mine")
+    .length,
+);
 
-    if (
-      this.flaggedMines === MINE_AMOUNT &&
-      this.flaggedCells === MINE_AMOUNT
-    ) {
-      return "win";
-    }
+const flaggedCells: number = $derived(
+  board.flat().filter((cell) => cell.status === "flagged").length,
+);
 
-    if (this.board.flat().some((cell) => cell.status === "clicked")) {
-      return "playing";
-    }
-
-    return "initial";
-  });
-
-  flaggedCells: number = $derived(
-    this.board.flat().filter((cell) => cell.status === "flagged").length,
-  );
-
-  flaggedMines: number = $derived(
-    this.board
+const gameStatus: "initial" | "playing" | "win" | "loss" = $derived.by(() => {
+  if (
+    board
       .flat()
-      .filter((cell) => cell.status === "flagged" && cell.content === "mine")
-      .length,
-  );
-
-  restartGame() {
-    this.board = createEmptyBoard();
+      .some((cell) => cell.status === "clicked" && cell.content === "mine")
+  ) {
+    return "loss";
   }
 
-  toggleFlag(row: number, col: number) {
-    this.board = toggleFlag($state.snapshot(this.board), row, col);
+  if (flaggedMines === MINE_AMOUNT && flaggedCells === MINE_AMOUNT) {
+    return "win";
   }
 
-  revealCells(row: number, col: number) {
-    if (this.gameStatus === "initial") {
-      this.board = placeMines($state.snapshot(this.board), row, col);
-    }
-
-    this.board = revealCells($state.snapshot(this.board), row, col);
+  if (board.flat().some((cell) => cell.status === "clicked")) {
+    return "playing";
   }
-}
 
-export const store = new Store();
+  return "initial";
+});
+
+const restartGame = () => {
+  board = createEmptyBoard();
+};
+
+const toggleFlag = (row: number, col: number) => {
+  board = toggleFlagEngine($state.snapshot(board), row, col);
+};
+
+const revealCells = (row: number, col: number) => {
+  if (gameStatus === "initial") {
+    board = placeMines($state.snapshot(board), row, col);
+  }
+
+  board = revealCellsEngine($state.snapshot(board), row, col);
+};
+
+export const store = {
+  get board() {
+    return board;
+  },
+  get flaggedCells() {
+    return flaggedCells;
+  },
+  get flaggedMines() {
+    return flaggedMines;
+  },
+  get gameStatus() {
+    return gameStatus;
+  },
+  restartGame,
+  toggleFlag,
+  revealCells,
+};

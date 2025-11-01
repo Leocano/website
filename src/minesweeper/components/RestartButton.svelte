@@ -1,9 +1,7 @@
 <script lang="ts">
   import { store } from "../store.svelte";
 
-  function restartGame() {
-    store.restartGame();
-  }
+  const { restartGame } = $derived(store);
 </script>
 
 <button

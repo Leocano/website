@@ -9,23 +9,25 @@
 
   const { content, status, row, col, bombsAround }: Props = $props();
 
-  function handleCellClick() {
-    if (status === "flagged" || store.gameStatus === "loss") {
+  const { gameStatus, revealCells, toggleFlag } = $derived(store);
+
+  const handleCellClick = () => {
+    if (status === "flagged" || gameStatus === "loss") {
       return;
     }
 
-    store.revealCells(row, col);
-  }
+    revealCells(row, col);
+  };
 
-  function handleContextMenu(e: Event) {
+  const handleContextMenu = (e: Event) => {
     e.preventDefault();
 
-    if (store.gameStatus !== "playing") {
+    if (gameStatus !== "playing") {
       return;
     }
 
-    store.toggleFlag(row, col);
-  }
+    toggleFlag(row, col);
+  };
 </script>
 
 <button

@@ -1,6 +1,6 @@
 import type { Board } from "../types";
 
-export function toggleFlag(board: Board, row: number, col: number): Board {
+export const toggleFlag = (board: Board, row: number, col: number): Board => {
   const cell = board[row][col];
 
   if (cell.status === "initial") {
@@ -10,4 +10,4 @@ export function toggleFlag(board: Board, row: number, col: number): Board {
   }
 
   return board;
-}
+};

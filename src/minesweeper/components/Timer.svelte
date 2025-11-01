@@ -5,7 +5,9 @@
   let elapsedMinutes = $state(0);
   let intervalId: NodeJS.Timeout | null;
 
-  function startTimer() {
+  const { gameStatus } = $derived(store);
+
+  const startTimer = () => {
     if (intervalId) return;
 
     intervalId = setInterval(() => {
@@ -16,37 +18,37 @@
         elapsedSeconds++;
       }
     }, 1000);
-  }
+  };
 
-  function stopTimer() {
+  const stopTimer = () => {
     intervalId && clearInterval(intervalId);
     intervalId = null;
-  }
+  };
 
-  function resetTimer() {
+  const resetTimer = () => {
     elapsedMinutes = 0;
     elapsedSeconds = 0;
-  }
+  };
 
-  function formatTimer() {
+  const formatTimer = () => {
     const seconds = elapsedSeconds < 10 ? `0${elapsedSeconds}` : elapsedSeconds;
     const minutes = elapsedMinutes < 10 ? `0${elapsedMinutes}` : elapsedMinutes;
 
     return `${minutes}:${seconds}`;
-  }
+  };
 
   $effect(() => {
-    if (store.gameStatus === "playing" && !intervalId) {
+    if (gameStatus === "playing" && !intervalId) {
       startTimer();
       return;
     }
 
-    if (store.gameStatus === "loss" || store.gameStatus === "win") {
+    if (gameStatus === "loss" || gameStatus === "win") {
       stopTimer();
       return;
     }
 
-    if (store.gameStatus === "initial") {
+    if (gameStatus === "initial") {
       stopTimer();
       resetTimer();
     }

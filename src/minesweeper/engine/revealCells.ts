@@ -2,7 +2,7 @@ import type { Board } from "../types";
 import { DIRECTIONS } from "../constants";
 import { isOutOfBounds } from "./isOutOfBounds";
 
-export function revealCells(board: Board, row: number, col: number): Board {
+export const revealCells = (board: Board, row: number, col: number): Board => {
   if (isOutOfBounds(row, col)) {
     return board;
   }
@@ -24,4 +24,4 @@ export function revealCells(board: Board, row: number, col: number): Board {
   }
 
   return board;
-}
+};
