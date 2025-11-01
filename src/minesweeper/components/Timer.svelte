@@ -6,6 +6,8 @@
   let intervalId: NodeJS.Timeout | null;
 
   function startTimer() {
+    if (intervalId) return;
+
     intervalId = setInterval(() => {
       if (elapsedSeconds >= 59) {
         elapsedMinutes++;
@@ -21,7 +23,12 @@
     intervalId = null;
   }
 
-  function formatTime() {
+  function resetTimer() {
+    elapsedMinutes = 0;
+    elapsedSeconds = 0;
+  }
+
+  function formatTimer() {
     const seconds = elapsedSeconds < 10 ? `0${elapsedSeconds}` : elapsedSeconds;
     const minutes = elapsedMinutes < 10 ? `0${elapsedMinutes}` : elapsedMinutes;
 
@@ -31,12 +38,19 @@
   $effect(() => {
     if (store.status === "playing" && !intervalId) {
       startTimer();
+      return;
     }
 
-    if ((store.status === "loss" || store.status === "win") && intervalId) {
+    if (store.status === "loss" || store.status === "win") {
       stopTimer();
+      return;
+    }
+
+    if (store.status === "initial") {
+      stopTimer();
+      resetTimer();
     }
   });
 </script>
 
-<div class="text-6xl text-white pb-6">{formatTime()}</div>
+<div class="text-6xl text-white pb-6">{formatTimer()}</div>
