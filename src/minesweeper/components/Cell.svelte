@@ -43,10 +43,10 @@
   {#if status === "flagged"}
     🚩
   {:else if status === "clicked"}
-    {#if content === "empty"}
-      {bombsAround}
-    {:else}
+    {#if content === "mine"}
       💣
+    {:else if bombsAround > 0}
+      {bombsAround}
     {/if}
   {/if}
 </button>
