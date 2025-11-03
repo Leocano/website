@@ -5,6 +5,6 @@
 </script>
 
 <button
-  class="bg-red-700 hover:bg-red-600 active:bg-red-900 focus:bg-red-800 text-white p-2 rounded-sm mb-6"
+  class="bg-red-700 hover:bg-red-600 active:bg-red-900 focus:bg-red-800 text-white p-2 rounded-sm mb-6 mx-auto block"
   onclick={restartGame}>Restart</button
 >

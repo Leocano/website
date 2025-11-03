@@ -5,7 +5,9 @@
   import RestartButton from "./components/RestartButton.svelte";
 </script>
 
-<Timer />
-<FlagCounter />
+<div class="flex justify-between">
+  <Timer />
+  <FlagCounter />
+</div>
 <RestartButton />
 <Board />
