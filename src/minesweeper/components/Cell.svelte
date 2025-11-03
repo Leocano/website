@@ -7,7 +7,7 @@
     col: number;
   };
 
-  const { content, status, row, col, bombsAround }: Props = $props();
+  const { content, status, row, col, minesAround }: Props = $props();
 
   const { gameStatus, revealCells, toggleFlag } = $derived(store);
 
@@ -45,8 +45,8 @@
   {:else if status === "clicked"}
     {#if content === "mine"}
       💣
-    {:else if bombsAround > 0}
-      {bombsAround}
+    {:else if minesAround > 0}
+      {minesAround}
     {/if}
   {/if}
 </button>

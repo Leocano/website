@@ -15,7 +15,7 @@ export const revealCells = (board: Board, row: number, col: number): Board => {
 
   board[row][col] = { ...cell, status: "clicked" };
 
-  if (cell.content === "mine" || cell.bombsAround > 0) {
+  if (cell.content === "mine" || cell.minesAround > 0) {
     return board;
   }
 

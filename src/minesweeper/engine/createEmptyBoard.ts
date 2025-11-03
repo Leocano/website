@@ -8,7 +8,7 @@ export const createEmptyBoard = () => {
       (): Cell => ({
         content: "empty",
         status: "initial",
-        bombsAround: 0,
+        minesAround: 0,
       }),
     ),
   );

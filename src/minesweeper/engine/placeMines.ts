@@ -36,7 +36,7 @@ export const placeMines = (
       const newRow = rowToPlace + rowOffset;
       const newCol = colToPlace + colOffset;
       if (!isOutOfBounds(newRow, newCol)) {
-        board[newRow][newCol].bombsAround++;
+        board[newRow][newCol].minesAround++;
       }
     }
   }
