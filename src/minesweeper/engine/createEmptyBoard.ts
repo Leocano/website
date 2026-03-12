@@ -1,0 +1,15 @@
+import { BOARD_SIZE } from "../constants";
+import type { Cell } from "../types";
+
+export const createEmptyBoard = () => {
+  return Array.from(Array(BOARD_SIZE.ROWS), () =>
+    Array.from(
+      Array(BOARD_SIZE.COLS),
+      (): Cell => ({
+        content: "empty",
+        status: "initial",
+        minesAround: 0,
+      }),
+    ),
+  );
+};

@@ -1,0 +1,10 @@
+---
+import Main from "../layouts/Main.astro";
+import MinesweeperGame from "../minesweeper/Minesweeper.svelte";
+---
+
+<Main>
+  <div class="mx-auto max-w-fit py-12">
+    <MinesweeperGame client:load />
+  </div>
+</Main>
